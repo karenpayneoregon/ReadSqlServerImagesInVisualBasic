@@ -20,7 +20,7 @@ Public Class Form1
         '
         ' Load ListBox with id, description and picture
         '
-        ListBoxForLoadAlImageslExample.DataSource = _ops.GetFruitsWithImagesFromList("1,2")
+        ListBoxForLoadAlImageslExample.DataSource = _ops.GetFruitsWithImagesFromList()
 
         '
         ' Load DataGridView via BindingSource set to a DataTable with id, description and picture
