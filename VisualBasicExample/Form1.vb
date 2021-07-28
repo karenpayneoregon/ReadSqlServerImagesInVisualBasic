@@ -3,8 +3,8 @@ Imports VisualBasicExamples.Classes
 
 Public Class Form1
 
-    Private ReadOnly _ops As DataOperations = New DataOperations
-    Private ReadOnly _bs As BindingSource = New BindingSource
+    Private ReadOnly _operations As DataOperations = New DataOperations
+    Private ReadOnly _bindingSource As BindingSource = New BindingSource
 
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
@@ -13,27 +13,27 @@ Public Class Form1
         '
         ' Load ListBox with id and description, no picture
         '
-        ListBoxForButtonClickExample.DataSource = _ops.GetFruits()
+        ListBoxForButtonClickExample.DataSource = _operations.GetFruits()
 
         cmdGetSingleImage.PerformClick()
 
         '
         ' Load ListBox with id, description and picture
         '
-        ListBoxForLoadAlImageslExample.DataSource = _ops.GetFruitsWithImagesFromList()
+        ListBoxForLoadAlImageslExample.DataSource = _operations.GetFruitsWithImagesFromList()
 
         '
         ' Load DataGridView via BindingSource set to a DataTable with id, description and picture
         '
-        _bs.DataSource = _ops.DataTable()
-        dgvFruitPictures.DataSource = _bs
+        _bindingSource.DataSource = _operations.DataTable()
+        dgvFruitPictures.DataSource = _bindingSource
         dgvFruitPictures.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
         '
         ' Setup PictureBox for displaying current image of 
         ' our BindingSource assigned to the DataGridView
         '
-        Dim imageBinding As New Binding("Image", _bs, "Picture")
+        Dim imageBinding As New Binding("Image", _bindingSource, "Picture")
         AddHandler imageBinding.Format, AddressOf BindImage
         PictureBoxForDataGridView.DataBindings.Add(imageBinding)
 
@@ -45,7 +45,7 @@ Public Class Form1
     ''' <param name="e"></param>
     Private Sub cmdGetSingleImage_Click(sender As Object, e As EventArgs) Handles cmdGetSingleImage.Click
         Dim primaryKey = CType(ListBoxForButtonClickExample.SelectedItem, Fruit).Id
-        PictureBoxForSingleClick.Image = _ops.GetImage(primaryKey)
+        PictureBoxForSingleClick.Image = _operations.GetImage(primaryKey)
     End Sub
     ''' <summary>
     ''' Save current image return via primary key
@@ -56,7 +56,7 @@ Public Class Form1
         SaveFileDialog1.FileName = ListBoxForButtonClickExample.Text.Replace(" ", "")
         If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
             Dim primaryKey = CType(ListBoxForButtonClickExample.SelectedItem, Fruit).Id
-            _ops.GetImage(primaryKey).Save(SaveFileDialog1.FileName)
+            _operations.GetImage(primaryKey).Save(SaveFileDialog1.FileName)
         End If
     End Sub
     Private Sub ListBox2_SelectedIndexChanged(sender As Object, e As EventArgs) _
@@ -66,7 +66,7 @@ Public Class Form1
             Dim color = Drawing.Color.Black
 
             If ListBoxForLoadAlImageslExample.Text.StartsWith("Red") Then
-                color = Drawing.Color.Azure
+                color = Color.Azure
             End If
 
 

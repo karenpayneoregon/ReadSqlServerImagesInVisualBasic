@@ -21,14 +21,14 @@ Namespace Classes
     Public Class DataOperations
         Inherits BaseSqlServerConnection
 
-        Private _pinvalidImage As Image
+        Private ReadOnly _invalidImage As Image
         ''' <summary>
         ''' This image is used when there are issues reading a image from a table
         ''' </summary>
         ''' <returns></returns>
         Public ReadOnly Property InvalidImage() As Image
             Get
-                Return _pinvalidImage
+                Return _invalidImage
             End Get
         End Property
         ''' <summary>
@@ -36,7 +36,7 @@ Namespace Classes
         ''' </summary>
         Public Sub New()
 
-            _pinvalidImage = ConvertTextToImage(
+            _invalidImage = ConvertTextToImage(
                 Environment.NewLine & "    Error",
                 "Arial", 20,
                 Color.Red, Color.White,
@@ -206,7 +206,7 @@ Namespace Classes
         ''' <returns></returns>
         Public Function GetImage(pIdentifier As Integer) As Image
 
-            Dim fruitImage As Image = _pinvalidImage
+            Dim fruitImage As Image = _invalidImage
 
             Using cn As New SqlConnection(ConnectionString)
                 Using cmd As New SqlCommand("SELECT Picture FROM dbo.Fruits WHERE id = @Id", cn)

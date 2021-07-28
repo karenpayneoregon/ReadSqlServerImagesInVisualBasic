@@ -1,9 +1,11 @@
-﻿Public MustInherit Class BaseSqlServerConnection
+﻿Imports VisualBasicExamples.Classes
+
+Public MustInherit Class BaseSqlServerConnection
     Inherits BaseExceptionsHandler
     ''' <summary>
     ''' This points to your database server
     ''' </summary>
-    Protected DatabaseServer As String = "KARENS-PC"
+    Protected DatabaseServer As String = ".\SQLEXPRESS"
     ''' <summary>
     ''' Name of database containing required tables
     ''' </summary>
